@@ -1,5 +1,6 @@
 # Sanghefte.no
 
+**Firebase credentials have been removed and CI/CD pipeline have been disabled**
 This is a NTNU bachelors project built for a real customer. 
 
 The project uses React as a front end framework and Firebase, and specifically Firestore and hosting

@@ -1,47 +1,47 @@
-name: Continuous Integration
-
-# This action works with pull requests and pushes
-on:
-  pull_request:
-    branches: [main]
-
-jobs:
-  prettier:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          # Make sure the actual branch is checked out when running on pull requests
-          ref: ${{ github.head_ref }}
-
-      - name: Prettify code
-        uses: creyD/prettier_action@v4.2
-        with:
-          # This part is also where you can pass other options, for example:
-          prettier_options: --check **/*.{js,ts,jsx,tsx,json}
-
-  build:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14.x, 16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-      - run: npm ci
-      - run: npm run build --if-present
-      - name: Archive Build
-        uses: actions/upload-artifact@v2
-        with:
-          name: build
-          path: build
+#name: Continuous Integration
+#
+## This action works with pull requests and pushes
+#on:
+#  pull_request:
+#    branches: [main]
+#
+#jobs:
+#  prettier:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v2
+#        with:
+#          # Make sure the actual branch is checked out when running on pull requests
+#          ref: ${{ github.head_ref }}
+#
+#      - name: Prettify code
+#        uses: creyD/prettier_action@v4.2
+#        with:
+#          # This part is also where you can pass other options, for example:
+#          prettier_options: --check **/*.{js,ts,jsx,tsx,json}
+#
+#  build:
+#    runs-on: ubuntu-latest
+#
+#    strategy:
+#      matrix:
+#        node-version: [14.x, 16.x]
+#        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - name: Use Node.js ${{ matrix.node-version }}
+#        uses: actions/setup-node@v2
+#        with:
+#          node-version: ${{ matrix.node-version }}
+#          cache: "npm"
+#      - run: npm ci
+#      - run: npm run build --if-present
+#      - name: Archive Build
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: build
+#          path: build
